@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Définition du type Program
 type Program = {
   id: string;
   title: string;
