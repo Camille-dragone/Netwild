@@ -1,4 +1,4 @@
-// Some data to make the trick
+import programRepository from "./programRepository";
 
 const programs = [
   {

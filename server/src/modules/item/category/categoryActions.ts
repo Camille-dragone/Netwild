@@ -1,3 +1,4 @@
+import categoryRepository from "./categoryRepository";
 const categories = [
   {
     id: 1,
@@ -11,6 +12,27 @@ const categories = [
 
 import type { RequestHandler } from "express";
 
+const browse: RequestHandler = async (req, res) => {
+  const categoriesFromDB = await categoryRepository.readAll();
+
+  res.json(categoriesFromDB);
+};
+
+const read: RequestHandler = (req, res) => {
+  const parsedId = Number.parseInt(req.params.id);
+
+  const category = categories.find((p) => p.id === parsedId);
+
+  if (category != null) {
+    res.json(category);
+  } else {
+    res.sendStatus(404);
+  }
+};
+
+export default { browse, read };
+
+/*
 const read: RequestHandler = (req, res) => {
   const parseId = Number.parseInt(req.params.id);
   const categorie = categories.find((c) => c.id === parseId);
@@ -31,5 +53,4 @@ const browse: RequestHandler = (req, res) => {
     res.json(categories);
   }
 };
-
-export default { read, browse };
+export default { read, browse } */
